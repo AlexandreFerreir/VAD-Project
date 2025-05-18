@@ -6,7 +6,7 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 
 # Import visualization function
-from visualizations.scatter_maps import create_filtered_animated_map
+from aviation_accidents_dashboard.visualizations.scatter_maps import create_filtered_animated_map
 
 def register_filter_callbacks(app, df):
     """

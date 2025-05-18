@@ -6,7 +6,7 @@ from dash import html, dcc
 from config import CARD_STYLE
 
 # Import visualization functions
-from visualizations.scatter_maps import create_plotly_scatter_map
+from aviation_accidents_dashboard.visualizations.scatter_maps import create_plotly_scatter_map
 from visualizations.time_series import create_accidents_by_year
 
 def create_stat_card(title, value, icon, color):

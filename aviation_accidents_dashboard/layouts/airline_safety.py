@@ -6,7 +6,7 @@ from dash import html, dcc
 from config import CARD_STYLE
 
 # Import visualization function
-from visualizations.airline_analysis import create_airline_safety_analysis
+from aviation_accidents_dashboard.visualizations.airline_analysis import create_airline_safety_analysis
 
 def create_airline_safety_layout(df):
     """

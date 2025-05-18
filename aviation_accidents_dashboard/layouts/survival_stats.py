@@ -6,7 +6,7 @@ from dash import html, dcc
 from config import CARD_STYLE
 
 # Import visualization functions
-from visualizations.survival_analysis import create_survival_statistics, create_extended_survival_analysis
+from aviation_accidents_dashboard.visualizations.survival_analysis import create_survival_statistics, create_extended_survival_analysis
 
 def create_survival_stats_layout(df):
     """
