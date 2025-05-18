@@ -5,13 +5,6 @@ import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
 import os
-import sys
-
-# Add the project root to the path
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(current_dir)
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
 
 # Now use proper absolute imports with full package paths
 from aviation_accidents_dashboard.config import CONTENT_STYLE, EXTERNAL_STYLESHEETS, HEATMAP_HTML_PATH, ROUTES_MAP_HTML_PATH, ASSETS_DIR

@@ -5,7 +5,8 @@ import pandas as pd
 import numpy as np
 import os
 import base64
-from config import CRASH_DATA_PATH, COORDINATES_PATH, ASSETS_DIR, USA_CRASH_DENSITY_IMG, TOP_ROUTES_IMG, US_ROUTES_IMG
+from aviation_accidents_dashboard.config import CRASH_DATA_PATH, COORDINATES_PATH, ASSETS_DIR, USA_CRASH_DENSITY_IMG, TOP_ROUTES_IMG, US_ROUTES_IMG
+
 
 def load_data():
     """
