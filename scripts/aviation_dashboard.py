@@ -80,13 +80,6 @@ df["Fatalities_Count"] = df["Fatalities_Count"].fillna(0).astype(int)
 df["Operator"] = df["Operator"].fillna("Unknown").replace(pd.NA, "Unknown")
 df["AC Type"] = df["AC Type"].fillna("Unknown").replace(pd.NA, "Unknown")
 
-# Load and encode the US accident risk map image
-try:
-    with open("images/USA_crash_volume_densitiy.png", "rb") as image_file:
-        encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
-except Exception as e:
-    print(f"Error loading image: {str(e)}")
-    encoded_image = None
 try:
     with open("images/USA_crash_volume_densitiy.png", "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
@@ -199,10 +192,9 @@ routes_data = generate_routes_data()
 
 
 # Function to create Folium map with edge bundled routes
-def create_edge_bundled_map():
-    # Import necessário para o edge bundling
+def create_edge_bundled_map():    # Import required for edge bundling
     
-    # Função para aplicar edge bundling às rotas
+    # Function to apply edge bundling to routes
     def apply_edge_bundling(routes_data):
         """
         Converts flight routes into a format suitable for edge bundling and applies the algorithm.
@@ -365,7 +357,7 @@ def create_edge_bundled_map():
                 
                 folium.Circle(
                     location=origin,
-                    radius=10000,  # raio em metros (10km)
+                    radius=10000,  # radius in meters (10km)
                     color='green',
                     fill=True,
                     fill_color='green',
@@ -486,40 +478,39 @@ def create_folium_heatmap():
     heatmap_only.save("assets/accident_heatmap.html")
     return len(heat_data)
 
-# Adicionar estes callbacks para gerar os mapas quando necessário
-# 1. Função para inicializar mapas - esta é a única que deve permanecer
+# Add these callbacks to generate maps when needed
+# 1. Function to initialize maps - this is the only one that should remain
 def initialize_maps():
-    """Inicializa ambos os mapas no início se não existirem"""
-    # Verificar e criar diretório assets se não existir
+    """Initialize both maps at startup if they don't exist"""
+    # Check and create assets directory if it doesn't exist
     if not os.path.exists('assets'):
         os.makedirs('assets')
     
-    # Gerar o mapa de calor
+    # Generate heat map
     if not os.path.exists("assets/accident_heatmap.html"):
         create_folium_heatmap()
     
-    # Gerar o mapa de rotas
+    # Generate routes map
     if not os.path.exists("assets/bundled_routes_map.html"):
         create_edge_bundled_map()
 
-# Chamar a função de inicialização uma única vez antes de definir o layout
+# Call the initialization function once before defining the layout
 initialize_maps()
 
 @app.callback(
     [Output("routes-map-iframe", "srcDoc"), Output("heatmap-iframe", "srcDoc")],
     Input("tabs", "active_tab"),
-    prevent_initial_call=False  # Permitir chamada na inicialização
+    prevent_initial_call=False  # Allow call on initialization
 )
 def load_maps(active_tab):
-    """Carrega ambos os mapas quando o tab-2 é selecionado"""
+    """Loads both maps when tab-2 is selected"""
     
     if active_tab != "tab-2":
         return "", ""
     
     routes_map_html = ""
     heatmap_html = ""
-    
-    # Carregar mapa de rotas
+      # Load routes map
     try:
         if os.path.exists("assets/bundled_routes_map.html"):
             with open("assets/bundled_routes_map.html", "r", encoding="utf-8") as f:
@@ -530,7 +521,7 @@ def load_maps(active_tab):
         print(f"Error loading routes map: {str(e)}")
         routes_map_html = f"<div style='color:red; text-align:center;'><h3>Error loading routes map</h3><p>{str(e)}</p></div>"
     
-    # Carregar mapa de calor
+    # Load heat map
     try:
         if os.path.exists("assets/accident_heatmap.html"):
             with open("assets/accident_heatmap.html", "r", encoding="utf-8") as f:
@@ -654,7 +645,7 @@ def create_accidents_by_year():
     
     return fig
 
-# Função para criar o gráfico das rotas mais perigosas
+# Function to create most dangerous routes chart
 def create_most_dangerous_routes_chart():
     # Words to exclude from routes
     excluded_terms = ["demonstration", "training", "test flight", "sightseeing", "test"]
@@ -779,7 +770,7 @@ def create_most_dangerous_routes_chart():
         
         return fig
 
-# Função para criar os gráficos de análise de companhias aéreas e aeronaves
+# Function to create airline and aircraft analysis charts
 def create_airline_aircraft_analysis():
     # Prepare data for analysis
     analysis_df = df.copy()
@@ -1361,7 +1352,7 @@ def create_survival_statistics():
     return fig_survival, fig_survival_trend, fig_aircraft_survival
 
 
-# Função para criar gráficos de análise de sobrevivência para a aba "Survival Statistics"
+# Function to create survival analysis charts for the "Survival Statistics" tab
 def create_extended_survival_analysis():
     """
     Creates comprehensive survival analysis visualizations for the dashboard
@@ -2284,10 +2275,9 @@ def render_content(tab):
     
     elif tab == "tab-2":
         # Crash Visualizations tab - showing both visualizations in sequence
-        return html.Div([
-            # Título principal
+        return html.Div([            # Main title
             dbc.Row([
-                dbc.Col(html.H3("Visualizações Globais de Acidentes Aéreos", className="text-center mb-4"))
+                dbc.Col(html.H3("Global Aviation Accident Visualizations", className="text-center mb-4"))
             ]),
             
             # Primeiro o mapa de rotas com edge bundling
@@ -2422,12 +2412,12 @@ def render_content(tab):
             dbc.Row([
                 dbc.Col(html.H3("US Aviation Accidents Analysis", className="text-center mb-4"))
             ]),
-            
-            # Stats cards row
+
             dbc.Row([
-                dbc.Col(create_stat_card("Total US Crashes", f"{total_us_crashes:,}", "fas fa-flag-usa", "#3498db"), width=4),
-                dbc.Col(create_stat_card("US Fatalities", f"{total_us_fatalities:,}", "fas fa-skull-crossbones", "#e74c3c"), width=4),
-                dbc.Col(create_stat_card("% of Global Crashes", f"{(total_us_crashes/len(df)*100):.1f}%", "fas fa-globe-americas", "#2c3e50"), width=4),
+                dbc.Col(create_stat_card("Total US Crashes", f"{total_us_crashes:,}", "fas fa-flag-usa", "#3498db"), width=3),
+                dbc.Col(create_stat_card("US Fatalities", f"{total_us_fatalities:,}", "fas fa-skull-crossbones", "#e74c3c"), width=3),
+                dbc.Col(create_stat_card("% of Global Crashes", f"{(total_us_crashes/len(df)*100):.1f}%", "fas fa-globe-americas", "#2c3e50"), width=3),
+                dbc.Col(create_stat_card("Date Range", f"1987 - 2008", "fas fa-calendar-alt", "#3498db"), width=3),
             ], className="mb-4"),
             
             # Risk map row - using the static image
@@ -2534,6 +2524,17 @@ def render_content(tab):
                         ])
                     ], style=CARD_STYLE)
                 ], width=6),
+
+                # Right column - Survival trend over time
+                dbc.Col([
+                    dbc.Card([
+                        dbc.CardHeader(html.H4("Survival Rate Trend Over Time", className="text-center")),
+                        dbc.CardBody([
+                            dcc.Graph(figure=fig_original_survival_trend, config={'displayModeBar': False})
+                        ])
+                    ], style=CARD_STYLE)
+                ], width=6)
+
             ], className="mb-4"),
             
             # Second row - Survival by Aircraft Type and Operator
@@ -2571,16 +2572,6 @@ def render_content(tab):
                         ])
                     ], style=CARD_STYLE)
                 ], width=7),
-                
-                # Right column - Original survival trend
-                dbc.Col([
-                    dbc.Card([
-                        dbc.CardHeader(html.H4("Survival Rate Trend Over Time", className="text-center")),
-                        dbc.CardBody([
-                            dcc.Graph(figure=fig_original_survival_trend, config={'displayModeBar': False})
-                        ])
-                    ], style=CARD_STYLE)
-                ], width=5)
             ], className="mb-4"),
             
             # Bottom row - Original Aircraft survival rates
@@ -2699,6 +2690,10 @@ def update_animated_map(n_clicks, selected_operators, selected_aircraft):
         style={"height": "700px"}
     )
 
+# # Run the app
+# if __name__ == "__main__":
+#     app.run_server(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8052)))
+
 # Run the app
 if __name__ == "__main__":
-    app.run_server(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8052)))
+    app.run(debug=True, port=8052)

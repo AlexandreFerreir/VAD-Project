@@ -1,1 +1,1 @@
-web: gunicorn aviation_dashboard:server
+web: gunicorn aviation_accidents_dashboard.app:server
