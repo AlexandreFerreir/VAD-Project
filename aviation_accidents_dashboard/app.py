@@ -5,26 +5,30 @@ import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
 import os
+import sys
 
-# Import configurations and constants
-from config import CONTENT_STYLE, EXTERNAL_STYLESHEETS, HEATMAP_HTML_PATH, ROUTES_MAP_HTML_PATH, ASSETS_DIR
+# Add the project root to the path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
-# Import data loading functionality
-from data_loader import load_data
+# Now use proper absolute imports with full package paths
+from aviation_accidents_dashboard.config import CONTENT_STYLE, EXTERNAL_STYLESHEETS, HEATMAP_HTML_PATH, ROUTES_MAP_HTML_PATH, ASSETS_DIR
+from aviation_accidents_dashboard.data_loader import load_data
+from aviation_accidents_dashboard.layouts.header import create_header
+from aviation_accidents_dashboard.layouts.overview import create_overview_layout
+from aviation_accidents_dashboard.layouts.crash_vis import create_crash_vis_layout
+from aviation_accidents_dashboard.layouts.animated_timeline import create_animated_timeline_layout
+from aviation_accidents_dashboard.layouts.usa_crashes import create_usa_crashes_layout
+from aviation_accidents_dashboard.layouts.survival_stats import create_survival_stats_layout
+from aviation_accidents_dashboard.layouts.airline_safety import create_airline_safety_layout
+from aviation_accidents_dashboard.layouts.statistics import create_statistics_layout
+from aviation_accidents_dashboard.callbacks.map_callbacks import register_map_callbacks
+from aviation_accidents_dashboard.callbacks.filter_callbacks import register_filter_callbacks
 
-# Import layout components
-from layouts.header import create_header
-from layouts.overview import create_overview_layout
-from layouts.crash_vis import create_crash_vis_layout
-from layouts.animated_timeline import create_animated_timeline_layout
-from layouts.usa_crashes import create_usa_crashes_layout
-from layouts.survival_stats import create_survival_stats_layout
-from layouts.airline_safety import create_airline_safety_layout
-from layouts.statistics import create_statistics_layout
-
-# Import callbacks
-from callbacks.map_callbacks import register_map_callbacks
-from callbacks.filter_callbacks import register_filter_callbacks
+# Import maps module
+from aviation_accidents_dashboard.visualizations.maps import create_folium_heatmap, create_edge_bundled_map
 
 # Initialize the Dash app with a nice theme
 app = dash.Dash(
@@ -44,8 +48,6 @@ df, location_dict, routes_data, encoded_images = load_data()
 # Initialize maps
 def initialize_maps():
     """Initialize both maps at startup if they don't exist"""
-    # Import maps module
-    from visualizations.maps import create_folium_heatmap, create_edge_bundled_map
     
     # Generate heat map
     if not os.path.exists(HEATMAP_HTML_PATH):
