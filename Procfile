@@ -1,0 +1,1 @@
+web: gunicorn aviation_dashboard:server

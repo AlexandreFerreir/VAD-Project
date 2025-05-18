@@ -1,0 +1,8 @@
+dash>=2.13.0
+dash-bootstrap-components>=1.4.0
+pandas>=2.0.0
+folium>=0.14.0
+plotly>=5.15.0
+numpy>=1.24.0
+datashader>=0.15.0
+gunicorn>=21.2.0
