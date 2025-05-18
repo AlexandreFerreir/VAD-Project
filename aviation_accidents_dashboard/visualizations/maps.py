@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 from datashader.bundling import hammer_bundle
 import os
-from config import HEATMAP_HTML_PATH, ROUTES_MAP_HTML_PATH, ASSETS_DIR
+from aviation_accidents_dashboard.config import HEATMAP_HTML_PATH, ROUTES_MAP_HTML_PATH, ASSETS_DIR
 
 def create_folium_heatmap(df):
     """

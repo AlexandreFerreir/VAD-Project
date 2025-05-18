@@ -3,7 +3,7 @@ Layout for the USA crashes tab
 """
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from config import CARD_STYLE
+from aviation_accidents_dashboard.config import CARD_STYLE
 from aviation_accidents_dashboard.layouts.overview import create_stat_card
 from aviation_accidents_dashboard.visualizations.us_analysis import create_us_crashes_analysis
 

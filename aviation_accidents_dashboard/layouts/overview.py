@@ -3,11 +3,11 @@ Layout for the overview tab
 """
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from config import CARD_STYLE
+from aviation_accidents_dashboard.config import CARD_STYLE
 
 # Import visualization functions
 from aviation_accidents_dashboard.visualizations.scatter_maps import create_plotly_scatter_map
-from visualizations.time_series import create_accidents_by_year
+from aviation_accidents_dashboard.visualizations.time_series import create_accidents_by_year
 
 def create_stat_card(title, value, icon, color):
     """

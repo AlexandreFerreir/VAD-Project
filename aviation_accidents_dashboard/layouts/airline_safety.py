@@ -3,7 +3,7 @@ Layout for the airline safety tab
 """
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from config import CARD_STYLE
+from aviation_accidents_dashboard.config import CARD_STYLE
 
 # Import visualization function
 from aviation_accidents_dashboard.visualizations.airline_analysis import create_airline_safety_analysis

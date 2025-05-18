@@ -3,7 +3,7 @@ Layout for the survival statistics tab
 """
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from config import CARD_STYLE
+from aviation_accidents_dashboard.config import CARD_STYLE
 
 # Import visualization functions
 from aviation_accidents_dashboard.visualizations.survival_analysis import create_survival_statistics, create_extended_survival_analysis

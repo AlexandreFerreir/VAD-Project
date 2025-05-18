@@ -3,7 +3,7 @@ Layout for the animated timeline tab
 """
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from config import CARD_STYLE
+from aviation_accidents_dashboard.config import CARD_STYLE
 
 def create_animated_timeline_layout(df):
     """

@@ -3,7 +3,7 @@ Callbacks for map visualizations
 """
 from dash import Input, Output
 import os
-from config import HEATMAP_HTML_PATH, ROUTES_MAP_HTML_PATH
+from aviation_accidents_dashboard.config import HEATMAP_HTML_PATH, ROUTES_MAP_HTML_PATH
 
 def register_map_callbacks(app):
     """
