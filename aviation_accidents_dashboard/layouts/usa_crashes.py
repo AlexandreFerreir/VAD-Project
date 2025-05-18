@@ -36,7 +36,7 @@ def create_usa_crashes_layout(df, encoded_images):
             dbc.Col(create_stat_card("Total US Crashes", f"{total_us_crashes:,}", "fas fa-flag-usa", "#3498db"), width=3),
             dbc.Col(create_stat_card("US Fatalities", f"{total_us_fatalities:,}", "fas fa-skull-crossbones", "#e74c3c"), width=3),
             dbc.Col(create_stat_card("% of Global Crashes", f"{(total_us_crashes/len(df)*100):.1f}%", "fas fa-globe-americas", "#2c3e50"), width=3),
-            dbc.Col(create_stat_card("Date Range", f"{us_df['Year'].min()} - {us_df['Year'].max()}", "fas fa-calendar-alt", "#3498db"), width=3),
+            dbc.Col(create_stat_card("Date Range", f"1987-2008", "fas fa-calendar-alt", "#3498db"), width=3),
         ], className="mb-4"),
         
         # Risk map row - using the static image
